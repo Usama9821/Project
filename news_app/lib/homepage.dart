@@ -129,10 +129,62 @@ class _homepageState extends State<homepage> {
               ],
             ),
           ),
-          // Divider(
-          //   height: 20,
-          //   color: Colors.white,
-          // ),
+          const Text(
+            'Select your preferred channel',
+            style: TextStyle(fontSize: 16),
+          ),
+          const Divider(
+            color: Colors.white,
+            height: 10,
+          ),
+          ElevatedButton(
+            child: const Text(
+              'GLOBAL',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.fromLTRB(60, 20, 60, 20),
+              elevation: 5,
+              shadowColor: Colors.black54,
+              primary: Colors.red,
+              onPrimary: Colors.white,
+              shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0),
+              ),
+            ),
+            onPressed: () {
+              setState(() {});
+            },
+          ),
+          const Divider(
+            color: Colors.white,
+            height: 10,
+          ),
+          ElevatedButton(
+            child: const Text(
+              'LOCAL',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.fromLTRB(72, 20, 72, 20),
+              elevation: 5,
+              shadowColor: Colors.black54,
+              primary: Colors.red,
+              onPrimary: Colors.white,
+              shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0),
+              ),
+            ),
+            onPressed: () {
+              setState(() {});
+            },
+          ),
         ],
       ),
     );
