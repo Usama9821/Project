@@ -56,7 +56,12 @@ class _homepageState extends State<homepage> {
         ),
         centerTitle: true,
         elevation: 0.2,
-        actions: [],
+        actions: const [
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Icon(Icons.search),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
