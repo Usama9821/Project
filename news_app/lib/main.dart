@@ -7,7 +7,7 @@ main() {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Color(0xFFF23B5F),
       ),
       home: homepage(),
     ),

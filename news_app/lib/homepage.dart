@@ -111,7 +111,7 @@ class _homepageState extends State<homepage> {
                   ' eNews ',
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                    backgroundColor: Colors.red,
+                    backgroundColor: Color(0xFFF23B5F),
                     fontSize: 42,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -149,7 +149,7 @@ class _homepageState extends State<homepage> {
               padding: EdgeInsets.fromLTRB(60, 20, 60, 20),
               elevation: 5,
               shadowColor: Colors.black54,
-              primary: Colors.red,
+              primary: Color(0xFFF23B5F),
               onPrimary: Colors.white,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(30.0),
