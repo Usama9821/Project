@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:dcdg/dcdg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:newsappflutter/artical_news.dart';
 import 'package:newsappflutter/constants.dart';
 import 'package:newsappflutter/list_of_country.dart';
+import 'drawer_test.dart';
+import 'settings.dart';
 
 void main() => runApp(const MyApp());
 
@@ -95,6 +96,7 @@ class _MyAppState extends State<MyApp> {
                   const SizedBox(height: 20),
                 ],
               ),
+
               ListTile(
                 title: TextFormField(
                   decoration: const InputDecoration(hintText: "Find Keyword"),
@@ -165,6 +167,21 @@ class _MyAppState extends State<MyApp> {
                     ),
                 ],
               ),
+              Column(
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Navigate back to Settings when tapped.
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => settingPage()),
+                      );
+                    },
+                    child: Text('Settings'),
+                  ),
+                ],
+              ),
               //ListTile(title: Text("Exit"), onTap: () => exit(0)),
             ],
           ),
@@ -191,120 +208,121 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
         ),
-        body: notFound
-            ? const Center(
-                child: Text("Not Found", style: TextStyle(fontSize: 30)),
-              )
-            : news.isEmpty
-                ? const Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.yellow,
-                    ),
-                  )
-                : ListView.builder(
-                    controller: controller,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: Card(
-                              elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: GestureDetector(
-                                onTap: () async {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      fullscreenDialog: true,
-                                      builder: (context) => ArticalNews(
-                                        newsUrl: news[index]['url'] as String,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 10,
-                                    horizontal: 15,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          if (news[index]['urlToImage'] == null)
-                                            Container()
-                                          else
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              child: CachedNetworkImage(
-                                                placeholder: (context, url) =>
-                                                    Container(),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        const SizedBox(),
-                                                imageUrl: news[index]
-                                                    ['urlToImage'] as String,
-                                              ),
-                                            ),
-                                          Positioned(
-                                            bottom: 8,
-                                            right: 8,
-                                            child: Card(
-                                              elevation: 0,
-                                              color: Theme.of(context)
-                                                  .primaryColor
-                                                  .withOpacity(0.8),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 8,
-                                                ),
-                                                child: Text(
-                                                  "${news[index]['source']['name']}",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .subtitle2,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const Divider(),
-                                      Text(
-                                        "${news[index]['title']}",
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          if (index == news.length - 1 && isLoading)
-                            const Center(
-                              child: CircularProgressIndicator(
-                                backgroundColor: Colors.yellow,
-                              ),
-                            )
-                          else
-                            const SizedBox(),
-                        ],
-                      );
-                    },
-                    itemCount: news.length,
-                  ),
+        body: settingPage(),
+        // body: notFound
+        //     ? const Center(
+        //         child: Text("Not Found", style: TextStyle(fontSize: 30)),
+        //       )
+        //     : news.isEmpty
+        //         ? const Center(
+        //             child: CircularProgressIndicator(
+        //               backgroundColor: Colors.yellow,
+        //             ),
+        //           )
+        //         : ListView.builder(
+        //             controller: controller,
+        //             itemBuilder: (context, index) {
+        //               return Column(
+        //                 children: [
+        //                   Padding(
+        //                     padding: const EdgeInsets.all(5),
+        //                     child: Card(
+        //                       elevation: 5,
+        //                       shape: RoundedRectangleBorder(
+        //                         borderRadius: BorderRadius.circular(20),
+        //                       ),
+        //                       child: GestureDetector(
+        //                         onTap: () async {
+        //                           Navigator.push(
+        //                             context,
+        //                             MaterialPageRoute(
+        //                               fullscreenDialog: true,
+        //                               builder: (context) => ArticalNews(
+        //                                 newsUrl: news[index]['url'] as String,
+        //                               ),
+        //                             ),
+        //                           );
+        //                         },
+        //                         child: Container(
+        //                           padding: const EdgeInsets.symmetric(
+        //                             vertical: 10,
+        //                             horizontal: 15,
+        //                           ),
+        //                           decoration: BoxDecoration(
+        //                             borderRadius: BorderRadius.circular(30),
+        //                           ),
+        //                           child: Column(
+        //                             children: [
+        //                               Stack(
+        //                                 children: [
+        //                                   if (news[index]['urlToImage'] == null)
+        //                                     Container()
+        //                                   else
+        //                                     ClipRRect(
+        //                                       borderRadius:
+        //                                           BorderRadius.circular(20),
+        //                                       child: CachedNetworkImage(
+        //                                         placeholder: (context, url) =>
+        //                                             Container(),
+        //                                         errorWidget:
+        //                                             (context, url, error) =>
+        //                                                 const SizedBox(),
+        //                                         imageUrl: news[index]
+        //                                             ['urlToImage'] as String,
+        //                                       ),
+        //                                     ),
+        //                                   Positioned(
+        //                                     bottom: 8,
+        //                                     right: 8,
+        //                                     child: Card(
+        //                                       elevation: 0,
+        //                                       color: Theme.of(context)
+        //                                           .primaryColor
+        //                                           .withOpacity(0.8),
+        //                                       child: Padding(
+        //                                         padding:
+        //                                             const EdgeInsets.symmetric(
+        //                                           horizontal: 10,
+        //                                           vertical: 8,
+        //                                         ),
+        //                                         child: Text(
+        //                                           "${news[index]['source']['name']}",
+        //                                           style: Theme.of(context)
+        //                                               .textTheme
+        //                                               .subtitle2,
+        //                                         ),
+        //                                       ),
+        //                                     ),
+        //                                   ),
+        //                                 ],
+        //                               ),
+        //                               const Divider(),
+        //                               Text(
+        //                                 "${news[index]['title']}",
+        //                                 style: const TextStyle(
+        //                                   fontWeight: FontWeight.bold,
+        //                                   fontSize: 18,
+        //                                 ),
+        //                               )
+        //                             ],
+        //                           ),
+        //                         ),
+        //                       ),
+        //                     ),
+        //                   ),
+        //                   if (index == news.length - 1 && isLoading)
+        //                     const Center(
+        //                       child: CircularProgressIndicator(
+        //                         backgroundColor: Colors.yellow,
+        //                       ),
+        //                     )
+        //                   else
+        //                     const SizedBox(),
+        //                 ],
+        //               );
+        //             },
+        //             itemCount: news.length,
+        //           ),
       ),
     );
   }
